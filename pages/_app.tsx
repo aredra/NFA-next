@@ -1,5 +1,6 @@
-import "../styles/globals.css";
+import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { wrapper } from "@/redux/store.ts";
 import Head from "next/head";
 import { Layout } from "./common";
 
