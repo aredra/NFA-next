@@ -3,16 +3,6 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
-  const [date, setDate] = useState(new Date());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDate(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [date]);
-
   return (
     <>
       <Head>
@@ -27,13 +17,10 @@ const Home: NextPage = () => {
           <a
             href="https://www.data.go.kr/data/15086458/fileData.do"
             target="_blank"
+            rel="noreferrer"
           >
             https://www.data.go.kr/data/15086458/fileData.do
           </a>
-        </p>
-        <p>
-          현재시간 :{" "}
-          {`${date.toLocaleDateString()} - ${date.toLocaleTimeString()}`}
         </p>
       </section>
     </>

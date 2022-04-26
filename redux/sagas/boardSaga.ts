@@ -14,15 +14,17 @@ interface BoardResponseType {
   };
 }
 
-function* createRescueActivity(user: BoardRequestType) {
+function* createRescueActivitySaga(report: BoardRequestType) {
+  console.log("createRescueActivity saga");
+
   try {
     const response: BoardResponseType = yield createRescueActivityApi(
-      user.payload,
+      report.payload,
     );
   } catch (error) {
     yield put(boardActions.requestFailure(error));
   }
 }
 export function* watchCreateRescue() {
-  yield takeLatest(boardActions.createRescueActivity, createRescueActivity);
+  yield takeLatest(boardActions.createRescueActivity, createRescueActivitySaga);
 }

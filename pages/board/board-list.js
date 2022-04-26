@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
-import { boardActions } from "@/redux/reducers/userReducer.ts";
-import { getRescueActivityListApi } from '@/api/boardApi.ts';
+import { useDispatch } from "react-redux";
+import { boardActions } from "@/redux/reducers/boardReducer.ts";
+import { getRescueActivityListApi } from "@/api/boardApi.ts";
 
 export default function Board() {
   const [note, setNote] = useState();
@@ -18,20 +18,22 @@ export default function Board() {
       } catch (error) {
         alert(error);
       }
-    }
+    };
     fetchData();
   }, []);
 
   const dispatch = useDispatch();
   const onClickCreate = () => {
+    console.log("onClickCreate");
     dispatch(boardActions.createRescueActivity(note));
-  }
+    console.log("dispatch end");
+  };
   const onClickUpdate = () => {
     dispatch(boardActions.updateRescueActivity(note));
-  }
+  };
   const onClickDelete = () => {
     dispatch(boardActions.deleteRescueActivity(note));
-  }
+  };
   return (
     <>
       <Head>
@@ -55,7 +57,7 @@ export default function Board() {
                 </tr>
               </thead>
               <tbody>
-                {response.map(data => {
+                {response.map((data) => {
                   return (
                     <tr key={data.id}>
                       <td className="p-2 border">{data.moveNfa}</td>
@@ -65,7 +67,7 @@ export default function Board() {
                       <td className="p-2 border">{data.patientAge}</td>
                       <td className="p-2 border">{data.accidentCity}</td>
                     </tr>
-                  )
+                  );
                 })}
               </tbody>
             </table>

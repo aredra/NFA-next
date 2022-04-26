@@ -11,7 +11,10 @@ const boardSlice = createSlice({
   name: "board",
   initialState,
   reducers: {
-    createRescueActivity(state: BoardState, payload) {},
+    createRescueActivity(state: BoardState, { payload }) {
+      state.data = [...state.data, payload];
+      state.loading = false;
+    },
     getRescueAcitivityList() {},
     updateRescueActivity(state: BoardState, payload) {},
     deleteRescueActivity(state: BoardState, payload) {},
