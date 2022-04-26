@@ -1,6 +1,7 @@
 import { takeLatest, put } from "redux-saga/effects";
 import { boardActions } from "@/redux/reducers/boardReducer.ts";
 import { BoardType } from "@/types/BoardType";
+import { createRescueActivityApi } from "@/api/boardApi.ts";
 
 interface BoardRequestType {
   type: string;
@@ -22,6 +23,6 @@ function* createRescueActivity(user: BoardRequestType) {
     yield put(boardActions.requestFailure(error));
   }
 }
-export function* watchJoin() {
-  yield takeLatest(userActions.joinRequest, createRescueActivity);
+export function* watchCreateRescue() {
+  yield takeLatest(boardActions.createRescueActivity, createRescueActivity);
 }

@@ -6,10 +6,10 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-export const joinApi = async (payload: BoardType) => {
+export const createRescueActivityApi = async (payload: BoardType) => {
   try {
     const response: AxiosResponse<unknown, BoardType[]> = await axios.post(
-      `${SERVER}/user/join`,
+      `${SERVER}/board/rescue-activity`,
       payload,
       { headers },
     );
@@ -19,10 +19,10 @@ export const joinApi = async (payload: BoardType) => {
   }
 };
 
-export const logoutApi = async () => {
+export const getRescueActivityListApi = async () => {
   try {
     const response: AxiosResponse<unknown, BoardType[]> = await axios.get(
-      `${SERVER}/user/logout`,
+      `${SERVER}/board/rescue-list`,
       { headers },
     );
     return response.data;

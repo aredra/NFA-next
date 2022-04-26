@@ -1,7 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import user from "./reducers/userReducer.ts";
-import board from "./reducers/boardReducer.ts";
+import user from "./userReducer.ts";
+import board from "./boardReducer.ts";
 
 const rootReducer = (state: any, action: any) => {
   // TODO: HYDRATE ??
