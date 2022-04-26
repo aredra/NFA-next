@@ -3,19 +3,19 @@ import Head from "next/head";
 export default function Board() {
   const response = [
     // {
-    //   id: 1,
-    //   moveNfa: "양평소방서",
-    //   reportDate: "2020-05-01",
-    //   moveDate: "2020-05-01",
-    //   moveTime: "10:00",
-    //   distance: 1.5,
-    //   arrivalDate: "2020-05-01",
-    //   arrivalTime: "10:10",
-    //   returnDate: "2020-05-01",
-    //   returnTime: "10:20",
-    //   patientGender: "남",
-    //   patientAge: "20",
-    //   accidentCity: "냠양주시",
+      // id: 1,
+      // moveNfa: "양평소방서",
+      // reportDate: "2020-05-01",
+      // moveDate: "2020-05-01",
+      // moveTime: "10:00",
+      // distance: 1.5,
+      // arrivalDate: "2020-05-01",
+      // arrivalTime: "10:10",
+      // returnDate: "2020-05-01",
+      // returnTime: "10:20",
+      // patientGender: "남",
+      // patientAge: "20",
+      // accidentCity: "냠양주시",
     // },
   ];
   return (
