@@ -15,7 +15,8 @@ export default function Board() {
       try {
         const response = await getRescueActivityListApi();
         if (response) {
-          setActivityList(activityList);
+          console.log(response);
+          setActivityList(response);
         }
       } catch (error) {
         alert(error);
@@ -27,7 +28,6 @@ export default function Board() {
   const dispatch = useDispatch();
   const onSubmit = (report) => {
     dispatch(boardActions.createRescueActivity(report));
-    setShowRegistModal(false);
   };
   const onClickCreate = () => {
     console.log("onClickCreate");
@@ -65,7 +65,10 @@ export default function Board() {
                     </tr>
                   </thead>
                   <tbody>
-                    {response.map((data) => {
+                    {activityList.map((data) => {
+                      if (!data.moveNfa) {
+                        return;
+                      }
                       return (
                         <tr key={data.id}>
                           <td className="p-2 border">{data.moveNfa}</td>
