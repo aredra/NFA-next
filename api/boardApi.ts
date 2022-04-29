@@ -30,3 +30,28 @@ export const getRescueActivityListApi = async () => {
     return error;
   }
 };
+
+export const updateRescueActivityApi = async (payload: BoardType) => {
+  try {
+    const response: AxiosResponse<unknown, BoardType[]> = await axios.put(
+      `${SERVER}/board/rescue-activity`,
+      payload,
+      { headers },
+    );
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const deleteRescueActivityApi = async (id: string) => {
+  try {
+    const response: AxiosResponse<unknown, BoardType[]> = await axios.delete(
+      `${SERVER}/board/rescue-activity/${id}`,
+      { headers },
+    );
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+};

@@ -1,6 +1,10 @@
 import { all } from "redux-saga/effects";
-import { watchCreateRescue } from "./boardSaga.ts";
+import {
+  watchCreateRescue,
+  watchUpdateRescue,
+  watchDeleteRescue,
+} from "./boardSaga.ts";
 
 export default function* rootSaga() {
-  yield all([watchCreateRescue()]);
+  yield all([watchCreateRescue(), watchUpdateRescue(), watchDeleteRescue()]);
 }

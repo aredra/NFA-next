@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { boardActions } from "@/redux/reducers/boardReducer.ts";
 import { getRescueActivityListApi } from "@/api/boardApi.ts";
@@ -10,35 +10,48 @@ export default function Board() {
   const [showRegistModal, setShowRegistModal] = useState(false);
   const [activityList, setActivityList] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getRescueActivityListApi();
-        if (response) {
-          console.log(response);
-          setActivityList(response);
-        }
-      } catch (error) {
-        alert(error);
+  const fetchData = async () => {
+    try {
+      const response = await getRescueActivityListApi();
+      if (response) {
+        console.log(response);
+        setActivityList(response);
       }
-    };
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 
   const dispatch = useDispatch();
   const onSubmit = (report) => {
+    if (report?._id) {
+      console.log("수정");
+      dispatch(boardActions.updateRescueActivity(report));
+      return;
+    }
+    console.log("생성");
     dispatch(boardActions.createRescueActivity(report));
   };
-  const onClickCreate = () => {
+  const onClickCreate = useCallback(() => {
     console.log("onClickCreate");
     setShowRegistModal(true);
-    console.log("dispatch end");
-  };
-  const onClickUpdate = () => {
-    dispatch(boardActions.updateRescueActivity(note));
-  };
-  const onClickDelete = () => {
-    dispatch(boardActions.deleteRescueActivity(note));
+  }, []);
+  const onClickUpdate = useCallback((data) => {
+    console.log("onClickUpdate");
+    setNote(data);
+    setShowRegistModal(true);
+  }, []);
+  const onClickDelete = (data) => {
+    if (!data._id) {
+      alert("삭제할 수 없습니다.");
+      return;
+    }
+    dispatch(boardActions.deleteRescueActivity(data._id));
+    fetchData();
   };
   return (
     <>
@@ -62,6 +75,7 @@ export default function Board() {
                       <th className="p-2 border">환자 성별</th>
                       <th className="p-2 border">환자 연령</th>
                       <th className="p-2 border">사고발생지</th>
+                      <th className="p-2 border">설정</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -70,13 +84,27 @@ export default function Board() {
                         return;
                       }
                       return (
-                        <tr key={data.id}>
+                        <tr key={data._id}>
                           <td className="p-2 border">{data.moveNfa}</td>
                           <td className="p-2 border">{data.reportDate}</td>
                           <td className="p-2 border">{data.distance}</td>
                           <td className="p-2 border">{data.patientGender}</td>
                           <td className="p-2 border">{data.patientAge}</td>
                           <td className="p-2 border">{data.accidentCity}</td>
+                          <td className="p-2 border flex justify-center">
+                            <button
+                              className="py-1 px-2 border-solid border-2 rounded-md"
+                              onClick={() => onClickUpdate(data)}
+                            >
+                              수정
+                            </button>
+                            <button
+                              className="ml-2 py-1 px-2 border-solid border-2 rounded-md"
+                              onClick={() => onClickDelete(data)}
+                            >
+                              삭제
+                            </button>
+                          </td>
                         </tr>
                       );
                     })}
@@ -94,22 +122,10 @@ export default function Board() {
             >
               등록
             </button>
-            <button
-              className="ml-4 py-2 px-4 border-solid border-2 rounded-md"
-              onClick={onClickUpdate}
-            >
-              수정
-            </button>
-            <button
-              className="ml-4 py-2 px-4 border-solid border-2 rounded-md"
-              onClick={onClickDelete}
-            >
-              삭제
-            </button>
           </div>
         </>
       )}
-      {showRegistModal && <BoardRegist handleSubmit={onSubmit} />}
+      {showRegistModal && <BoardRegist handleSubmit={onSubmit} note={note} />}
     </>
   );
 }

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
-export default function BoardRegist({ handleSubmit }) {
-  const [reportInfo, setReportInfo] = useState({});
+export default function BoardRegist({ handleSubmit, note }) {
+  const [reportInfo, setReportInfo] = useState(note || {});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setReportInfo({ ...reportInfo, [name]: value });
-    console.log(reportInfo);
   };
 
   return (
