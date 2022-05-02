@@ -1,6 +1,6 @@
 import { takeLatest, put } from "redux-saga/effects";
 import { boardActions } from "@/redux/reducers/boardReducer.ts";
-import { BoardType } from "@/types/BoardType";
+import { BoardType } from "@/types/board";
 import {
   createRescueActivityApi,
   updateRescueActivityApi,

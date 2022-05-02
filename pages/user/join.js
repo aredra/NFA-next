@@ -1,19 +1,20 @@
 import { useState } from "react";
 import Head from "next/head";
+import { useDispatch } from "react-redux";
+import { userActions } from "@/redux/reducers/userReducer.ts";
 
 export default function Join() {
   const [userInfo, setUserInfo] = useState({});
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value, userInfo);
-
     setUserInfo({ ...userInfo, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("회원가입 요청!");
+    dispatch(userActions.joinRequest(userInfo));
   };
 
   return (

@@ -1,15 +1,13 @@
 import axios, { AxiosResponse } from "axios";
-import { BoardType } from "@/types/BoardType";
+import { BoardType } from "@/types/board";
+import { SERVER, headers } from "@/api/common";
 
-const SERVER = "http://127.0.0.1:5600";
-const headers = {
-  "Content-Type": "application/json",
-};
+const baseUrl = `${SERVER}/board`;
 
 export const createRescueActivityApi = async (payload: BoardType) => {
   try {
     const response: AxiosResponse<unknown, BoardType[]> = await axios.post(
-      `${SERVER}/board/rescue-activity`,
+      `${baseUrl}/rescue-activity`,
       payload,
       { headers },
     );
@@ -22,7 +20,7 @@ export const createRescueActivityApi = async (payload: BoardType) => {
 export const getRescueActivityListApi = async () => {
   try {
     const response: AxiosResponse<unknown, BoardType[]> = await axios.get(
-      `${SERVER}/board/rescue-list`,
+      `${baseUrl}/rescue-list`,
       { headers },
     );
     return response.data;
@@ -34,7 +32,7 @@ export const getRescueActivityListApi = async () => {
 export const updateRescueActivityApi = async (payload: BoardType) => {
   try {
     const response: AxiosResponse<unknown, BoardType[]> = await axios.put(
-      `${SERVER}/board/rescue-activity`,
+      `${baseUrl}/rescue-activity`,
       payload,
       { headers },
     );
@@ -47,7 +45,7 @@ export const updateRescueActivityApi = async (payload: BoardType) => {
 export const deleteRescueActivityApi = async (id: string) => {
   try {
     const response: AxiosResponse<unknown, BoardType[]> = await axios.delete(
-      `${SERVER}/board/rescue-activity/${id}`,
+      `${baseUrl}/rescue-activity/${id}`,
       { headers },
     );
     return response.data;

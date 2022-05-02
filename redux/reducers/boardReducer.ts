@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BoardState, BoardType } from "@/types/BoardType";
+import { BoardState, BoardType } from "@/types/board";
 
 const initialState: BoardState = {
   loading: false,
