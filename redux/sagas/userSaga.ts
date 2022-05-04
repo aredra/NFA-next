@@ -1,4 +1,4 @@
-import { takeLatest, put } from "redux-saga/effects";
+import { call, takeLatest, put } from "redux-saga/effects";
 import { userActions } from "@/redux/reducers/userReducer.ts";
 import { UserType } from "@/types/user";
 import { joinApi, loginApi, logoutApi } from "@/api/userApi.ts";
@@ -26,7 +26,6 @@ function* join(user: UserJoinType) {
   try {
     const response: UserJoinSuccessType = yield joinApi(user.payload);
     yield put(userActions.joinSuccess(response));
-    location.href = "/user/login";
   } catch (error) {
     yield put(userActions.joinFailure(error));
   }
@@ -37,10 +36,12 @@ export function* watchJoin() {
 
 function* login(user: UserLoginType) {
   try {
-    const response: UserLoginSuccessType = yield loginApi(user.payload);
+    const response: UserLoginSuccessType = yield call(loginApi, user.payload);
     yield put(userActions.loginSuccess(response));
+    location.href = "/board/board-list";
   } catch (error) {
     yield put(userActions.loginFailure(error));
+    alert("로그인 실패");
   }
 }
 export function* watchLogin() {
@@ -49,7 +50,7 @@ export function* watchLogin() {
 
 function* logout() {
   try {
-    const response: UserLoginSuccessType = yield logoutApi();
+    const response: UserLoginSuccessType = yield call(logoutApi);
     yield put(userActions.logoutSuccess(response));
   } catch (error) {
     yield put(userActions.logoutFailure(error));

@@ -11,7 +11,7 @@ export const loginApi = async (payload: UserType) => {
       { headers },
     );
     return response.data;
-  } catch (err) {
+  } catch (err: any) {
     return err;
   }
 };
@@ -24,8 +24,8 @@ export const logoutApi = async () => {
       { headers },
     );
     return response.data;
-  } catch (err) {
-    return err;
+  } catch (err: any) {
+    return new Error(err);
   }
 };
 
@@ -36,7 +36,7 @@ export const joinApi = async (payload: UserType) => {
       payload,
       { headers },
     );
-  } catch (err) {
-    return err;
+  } catch (err: any) {
+    return new Error(err);
   }
 };

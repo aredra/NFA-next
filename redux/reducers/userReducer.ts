@@ -17,10 +17,12 @@ const userSlice = createSlice({
     joinSuccess(state: UserState, { payload }) {
       state.data = [...state.data, payload];
       state.loading = false;
+      location.href = "/user/login";
     },
     joinFailure(state: UserState, { payload }) {
       state.data = payload;
       state.loading = false;
+      alert("회원가입 실패");
     },
     loginRequest(state: UserState, payload) {
       state.loading = true;

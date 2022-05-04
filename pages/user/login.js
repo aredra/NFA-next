@@ -1,8 +1,11 @@
 import { useState } from "react";
 import Head from "next/head";
+import { useDispatch } from "react-redux";
+import { userActions } from "@/redux/reducers/userReducer.ts";
 
 export default function Login() {
   const [userInfo, setUserInfo] = useState({});
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -11,7 +14,7 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("로그인 요청!");
+    dispatch(userActions.loginRequest(userInfo));
   };
 
   return (
@@ -26,12 +29,12 @@ export default function Login() {
           onSubmit={handleSubmit}
         >
           <div className="m-4">
-            <label htmlFor="id">사용자 ID: </label>
+            <label htmlFor="userid">사용자 ID: </label>
             <input
               className="ml-2"
               type="text"
-              id="id"
-              name="id"
+              id="userid"
+              name="userid"
               value={userInfo.userId}
               onChange={handleChange}
             />

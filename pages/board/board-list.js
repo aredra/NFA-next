@@ -45,14 +45,14 @@ export default function Board() {
     setNote(data);
     setShowRegistModal(true);
   }, []);
-  const onClickDelete = (data) => {
+  const onClickDelete = useCallback((data) => {
     if (!data._id) {
       alert("삭제할 수 없습니다.");
       return;
     }
     dispatch(boardActions.deleteRescueActivity(data._id));
     fetchData();
-  };
+  }, []);
   return (
     <>
       <Head>

@@ -29,12 +29,12 @@ export default function Join() {
           className="w-3/5 flex flex-col justify-evenly items-center"
         >
           <div className="m-4">
-            <label htmlFor="id">사용자 ID: </label>
+            <label htmlFor="userid">사용자 ID: </label>
             <input
               className="ml-2"
               type="text"
-              id="id"
-              name="id"
+              id="userid"
+              name="userid"
               value={userInfo.userId}
               onChange={handleChange}
             />
