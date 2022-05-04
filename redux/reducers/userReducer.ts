@@ -30,6 +30,7 @@ const userSlice = createSlice({
     loginSuccess(state: UserState, { payload }) {
       state.data = [...state.data, payload];
       state.loading = false;
+      sessionStorage.setItem("token", JSON.stringify(payload?.token));
     },
     loginFailure(state: UserState, { payload }) {
       state.data = payload;
@@ -41,7 +42,7 @@ const userSlice = createSlice({
     logoutSuccess(state: UserState, { payload }) {
       state.data = [...state.data, payload];
       state.loading = false;
-      localStorage.clear();
+      sessionStorage.clear();
       location.href = "/";
     },
     logoutFailure(state: UserState, { payload }) {

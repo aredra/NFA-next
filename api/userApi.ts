@@ -18,10 +18,16 @@ export const loginApi = async (payload: UserType) => {
 
 export const logoutApi = async () => {
   try {
-    const response: AxiosResponse<unknown, UserType[]> = await axios.post(
+    const response: AxiosResponse<unknown, UserType[]> = await axios.get(
       `${baseUrl}/logout`,
-      {},
-      { headers },
+      {
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${JSON.parse(
+            sessionStorage.getItem("token") || "",
+          )}`,
+        },
+      },
     );
     return response.data;
   } catch (err: any) {

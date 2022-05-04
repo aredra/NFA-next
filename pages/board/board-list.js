@@ -23,6 +23,15 @@ export default function Board() {
   };
 
   useEffect(() => {
+    try {
+      const token = JSON.parse(sessionStorage.getItem("token"));
+      if (!token) {
+        throw new Error("로그인이 필요합니다.");
+      }
+    } catch (error) {
+      alert("로그인이 필요합니다.");
+      location.href = "/user/login";
+    }
     fetchData();
   }, []);
 
